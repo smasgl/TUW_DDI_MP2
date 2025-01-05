@@ -3,6 +3,7 @@
 
 	let setPassword = "";
 	let currentPassword = "";
+	let checkedIndexes = 0;
 	let files: FileList;
 	let fileAsText:string[];
 
@@ -49,6 +50,7 @@
 			return;
 
 		passwordFound = undefined;
+		checkedIndexes = 0;
 		resetTimer();
 		await startTimer();
 
@@ -64,6 +66,8 @@
 				passwordFound = true;
 				return;
 			}
+
+			checkedIndexes++;
 
 			if(delay)
 				await delay1ms(1);
@@ -102,18 +106,40 @@
 				<div class="card p-4 space-y-2 w-max">
 					<div class="space-y-2">
 						<p>Das zu knackende Passwort eingeben:</p>
-						<div class="flex justify-between">
+						<div class="flex justify-between space-x-2">
 							<div class="input-group input-group-divider grid-cols-[auto_1fr_auto] w-max {timerId?"pointer-events-none":""}">
 								<div class="input-group-shim"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M6.5 6A4.5 4.5 0 0 0 2 10.5v11A4.5 4.5 0 0 0 6.5 26h19a4.5 4.5 0 0 0 4.5-4.5v-11A4.5 4.5 0 0 0 25.5 6zM4 10.5A2.5 2.5 0 0 1 6.5 8h19a2.5 2.5 0 0 1 2.5 2.5v11a2.5 2.5 0 0 1-2.5 2.5h-19A2.5 2.5 0 0 1 4 21.5zm3.707 2.793a1 1 0 0 0-1.414 1.414L7.586 16l-1.293 1.293a1 1 0 1 0 1.414 1.414L9 17.414l1.293 1.293a1 1 0 0 0 1.414-1.414L10.414 16l1.293-1.293a1 1 0 0 0-1.414-1.414L9 14.586zm6.086 0a1 1 0 0 1 1.414 0l1.293 1.293l1.293-1.293a1 1 0 0 1 1.414 1.414L17.914 16l1.293 1.293a1 1 0 0 1-1.414 1.414L16.5 17.414l-1.293 1.293a1 1 0 0 1-1.414-1.414L15.086 16l-1.293-1.293a1 1 0 0 1 0-1.414M22 17a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2z"/></svg></div>
 								<input type="search" placeholder="123123" bind:value={setPassword}/>
-								<button class="variant-filled-secondary" on:click={hack}>
+								<button class="variant-filled-secondary w-24" on:click={hack}>
 									{#if timerId}
-										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+										<svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
 									{:else}
 										Knacken
 									{/if}
 								</button>
 							</div>
+							{#if passwordFound == undefined}
+							<div class="flex items-end w-48 pointer-events-none">
+								<a href="/" class="btn variant-filled-surface">
+									<span><svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16"><path fill="currentColor" d="M7.5 10c-.28 0-.5-.22-.5-.5v-7c0-.28.22-.5.5-.5s.5.22.5.5v7c0 .28-.22.5-.5.5"/><path fill="currentColor" d="M7.5 15C3.92 15 1 12.18 1 8.72c0-2.41 1.46-4.64 3.72-5.68c.25-.11.55 0 .66.25s0 .55-.25.66c-1.91.87-3.14 2.74-3.14 4.77c0 2.91 2.47 5.28 5.5 5.28s5.5-2.37 5.5-5.28c0-2.02-1.23-3.9-3.14-4.77a.5.5 0 0 1-.25-.66c.11-.25.41-.36.66-.25c2.26 1.03 3.72 3.26 3.72 5.68c0 3.46-2.92 6.28-6.5 6.28Z"/></svg></span>
+									<span>Undefiniert</span>
+								</a>
+							</div>
+							{:else if passwordFound}
+								<div class="flex items-end w-48 pointer-events-none">
+									<a href="/" class="btn variant-filled-success">
+										<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor"><path d="M7.665 10.237L9.198 8.95l1.285 1.532l3.064-2.571l1.286 1.532l-4.596 3.857z"/><path fill-rule="evenodd" d="M16.207 4.893a8 8 0 0 1 .662 10.565q.023.02.045.042l4.243 4.243a1 1 0 0 1-1.414 1.414L15.5 16.914l-.042-.045A8.001 8.001 0 0 1 4.893 4.893a8 8 0 0 1 11.314 0m-1.414 9.9a6 6 0 1 0-8.485-8.485a6 6 0 0 0 8.485 8.485" clip-rule="evenodd"/></g></svg></span>
+										<span>Gefunden</span>
+									</a>
+								</div>
+							{:else}
+								<div class="flex items-end w-48 pointer-events-none">
+									<a href="/" class="btn variant-filled-error">
+										<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg></span>
+										<span>Nicht gefunden</span>
+									</a>
+								</div>	
+							{/if}
 							<div class="flex items-center">
 								<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={delay}>1ms Verzögerung</SlideToggle>
 							</div>
@@ -137,28 +163,13 @@
 							</div>
 						</div>
 
-						{#if passwordFound == undefined}
-							<div class="flex items-end w-48">
-								<a href="/" class="btn variant-filled-surface">
-									<span><svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16"><path fill="currentColor" d="M7.5 10c-.28 0-.5-.22-.5-.5v-7c0-.28.22-.5.5-.5s.5.22.5.5v7c0 .28-.22.5-.5.5"/><path fill="currentColor" d="M7.5 15C3.92 15 1 12.18 1 8.72c0-2.41 1.46-4.64 3.72-5.68c.25-.11.55 0 .66.25s0 .55-.25.66c-1.91.87-3.14 2.74-3.14 4.77c0 2.91 2.47 5.28 5.5 5.28s5.5-2.37 5.5-5.28c0-2.02-1.23-3.9-3.14-4.77a.5.5 0 0 1-.25-.66c.11-.25.41-.36.66-.25c2.26 1.03 3.72 3.26 3.72 5.68c0 3.46-2.92 6.28-6.5 6.28Z"/></svg></span>
-									<span>Undefiniert</span>
-								</a>
+						<div class="space-y-2 w-40">
+							<p>Überprüfte Indexe</p>
+							<div class="input-group input-group-divider grid-cols-[1fr_auto]">
+								<div class="h-10">{checkedIndexes}</div>
+								<div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027c.134.027.294.096.448.182c.077.042.15.147.15.314V8a.5.5 0 1 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04c.118.046.3.207.486.43c.081.096.15.19.2.259V8.5a.5.5 0 0 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.035a.5.5 0 0 1-.416-.223l-1.433-2.15a1.5 1.5 0 0 1-.243-.666l-.345-3.105a.5.5 0 0 1 .399-.546L5 8.11V9a.5.5 0 0 0 1 0V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v5.34l-1.2.24a1.5 1.5 0 0 0-1.196 1.636l.345 3.106a2.5 2.5 0 0 0 .405 1.11l1.433 2.15A1.5 1.5 0 0 0 6.035 16h6.385a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716c-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642a2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025"/></svg></div>
 							</div>
-						{:else if passwordFound}
-							<div class="flex items-end w-48">
-								<a href="/" class="btn variant-filled-success">
-									<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor"><path d="M7.665 10.237L9.198 8.95l1.285 1.532l3.064-2.571l1.286 1.532l-4.596 3.857z"/><path fill-rule="evenodd" d="M16.207 4.893a8 8 0 0 1 .662 10.565q.023.02.045.042l4.243 4.243a1 1 0 0 1-1.414 1.414L15.5 16.914l-.042-.045A8.001 8.001 0 0 1 4.893 4.893a8 8 0 0 1 11.314 0m-1.414 9.9a6 6 0 1 0-8.485-8.485a6 6 0 0 0 8.485 8.485" clip-rule="evenodd"/></g></svg></span>
-									<span>Gefunden</span>
-								</a>
-							</div>
-						{:else}
-							<div class="flex items-end w-48">
-								<a href="/" class="btn variant-filled-error">
-									<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg></span>
-									<span>Nicht gefunden</span>
-								</a>
-							</div>	
-						{/if}
+						</div>
 					</div>
 				</div>
 			</div>
