@@ -1,11 +1,15 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, Modal, initializeStores } from '@skeletonlabs/skeleton';
+
+	initializeStores();
 </script>
 
 <svelte:head>
 	<title>MP2-Artefakt</title>
 </svelte:head>
+
+<Modal />
 
 <!-- App Shell -->
 <AppShell>
