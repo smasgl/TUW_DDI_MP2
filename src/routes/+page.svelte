@@ -13,7 +13,6 @@
 		VERIFIED
 	}
 
-
 	let randNum1 = Math.floor(Math.random() * 100) + 1;
 	let randNum2 = Math.floor(Math.random() * 100) + 1;
 
@@ -146,8 +145,39 @@
 </script>
 
 <div class="h-full w-full flex items-center">
-	<div class="w-full p-5 space-y-5 items-center justify-items-center">
-		<h3 class="h3">Brute force durch Criminal Thinking</h3>
+	<div class="w-full p-5 flex items-center">
+		<div class="w-full p-5 space-y-5 justify-items-center">
+			<h3 class="h3">Schutz durch Creative thinking</h3>
+		
+			<div class="space-y-5 card p-5 w-max">
+				<div class="space-y-2">
+					<h4 class="h4">User Seite</h4>
+					<div class="card p-4 flex flex-col space-y-2 w-max">
+						<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordLength}>Passwort Länge größer 8</SlideToggle>
+						<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordAlphaNumeric}>Passwort alpha Numerik</SlideToggle>
+						<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordSpecialCharacters}>Passwort Sonderzeichen</SlideToggle>
+					</div>
+				</div>
+		
+				<div class="space-y-2">
+					<h4 class="h4">Anbieter Seite</h4>
+					<div class="card p-4 flex flex-col space-y-2 w-max">
+						<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordTries}>Maximale Versuche</SlideToggle>
+						<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordCaptcha}>Captcha anfordern</SlideToggle>
+						<a href="/" class="btn variant-filled" on:click={resetBlockage}>
+							<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.003 21q-1.866 0-3.5-.701q-1.632-.701-2.854-1.912t-1.936-2.85T3 12.04h1q0 1.65.635 3.102q.634 1.453 1.722 2.54T8.9 19.398t3.099.628q3.35 0 5.675-2.325T20 12.025T17.675 6.35T12 4.025q-2.436 0-4.365 1.28q-1.927 1.28-2.881 3.349h2.9v1H3V5h1v2.98q1.087-2.228 3.21-3.604T12 3q1.868 0 3.51.709t2.858 1.922t1.923 2.857t.709 3.509t-.708 3.51t-1.924 2.859t-2.856 1.925t-3.509.709M10 15.77q-.376 0-.63-.255t-.254-.63v-3q0-.376.287-.63q.287-.255.712-.255V9.884q0-.777.554-1.33Q11.222 8 12 8t1.331.554t.554 1.33V11q.425 0 .712.254q.288.255.288.63v3q0 .377-.255.631q-.254.254-.63.254zm.885-4.77h2.23V9.892q0-.47-.325-.797T12 8.77t-.79.326t-.326.797z"/></svg></span>
+							<span>Sperrung zurücksetzten</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="h-full overflow-clip">
+		<span class="divider-vertical border-dashed h-full"/>
+	</div>
+	<div class="w-full p-5 space-y-5 items-center justify-items-center px-28">
+		<h3 class="h3">Brute force durch Criminal thinking</h3>
 
 		<div class="space-y-5 card p-5 w-max">
 			<div class="space-y-2">
@@ -280,29 +310,28 @@
 	<div class="h-full overflow-clip">
 		<span class="divider-vertical border-dashed h-full"/>
 	</div>
-	<div class="w-full p-5 space-y-5 items-center justify-items-center">
-		<h3 class="h3">Schutz durch Creative Thinking</h3>
-		
-		<div class="space-y-5 card p-5 w-max">
-			<div class="space-y-2">
-				<h4 class="h4">User Seite</h4>
-				<div class="card p-4 flex flex-col space-y-2 w-max">
-					<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordLength}>Passwort Länge größer 8</SlideToggle>
-					<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordAlphaNumeric}>Passwort alpha Numerik</SlideToggle>
-					<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordSpecialCharacters}>Passwort Sonderzeichen</SlideToggle>
-				</div>
-			</div>
+	<div class="w-full p-5 space-y-5 justify-items-center">
+		<h3 class="h3">Erklärung einiger Begriffe</h3>
 	
+		<div class="card p-5 w-max grid grid-cols-2 grid-rows-2">
 			<div class="space-y-2">
-				<h4 class="h4">Anbieter Seite</h4>
-				<div class="card p-4 flex flex-col space-y-2 w-max">
-					<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordTries}>Maximale Versuche</SlideToggle>
-					<SlideToggle name="slider-label" active="bg-primary-500" size="sm" bind:checked={passwordCaptcha}>Captcha Anfordern</SlideToggle>
-					<a href="/" class="btn variant-filled" on:click={resetBlockage}>
-						<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.003 21q-1.866 0-3.5-.701q-1.632-.701-2.854-1.912t-1.936-2.85T3 12.04h1q0 1.65.635 3.102q.634 1.453 1.722 2.54T8.9 19.398t3.099.628q3.35 0 5.675-2.325T20 12.025T17.675 6.35T12 4.025q-2.436 0-4.365 1.28q-1.927 1.28-2.881 3.349h2.9v1H3V5h1v2.98q1.087-2.228 3.21-3.604T12 3q1.868 0 3.51.709t2.858 1.922t1.923 2.857t.709 3.509t-.708 3.51t-1.924 2.859t-2.856 1.925t-3.509.709M10 15.77q-.376 0-.63-.255t-.254-.63v-3q0-.376.287-.63q.287-.255.712-.255V9.884q0-.777.554-1.33Q11.222 8 12 8t1.331.554t.554 1.33V11q.425 0 .712.254q.288.255.288.63v3q0 .377-.255.631q-.254.254-.63.254zm.885-4.77h2.23V9.892q0-.47-.325-.797T12 8.77t-.79.326t-.326.797z"/></svg></span>
-						<span>Sperrung zurücksetzten</span>
-					</a>
-				</div>
+				<a class="anchor text-lg" href="https://de.wikipedia.org/wiki/Rainbow_Table" target="_blank">Rainbow table</a>
+				<blockquote class="blockquote w-64 text-ellipsis">Ein Rainbow Table ist eine vorcomputierte Tabelle der meist verwendeten Passwörtern.</blockquote>
+			</div>
+
+			<div class="space-y-2">
+				<a class="anchor text-lg" href="https://dwi.lva.tuwien.ac.at/dwi20241210_creative.html" target="_blank">Creative thinking</a>
+				<blockquote class="blockquote w-64 text-ellipsis">Kreatives Denken ist das Finden innovativer Lösungen durch unkonventionelle Perspektiven.</blockquote>
+			</div>
+
+			<div class="space-y-2">
+				<a class="anchor text-lg" href="https://de.wikipedia.org/wiki/Brute-Force-Methode" target="_blank">Brute force</a>
+				<blockquote class="blockquote w-64 text-ellipsis">Brute Force ist eine Methode, bei der alle möglichen Kombinationen systematisch ausprobiert werden, um ein Passwort oder eine Verschlüsselung zu knacken.</blockquote>
+			</div>
+
+			<div class="space-y-2">
+				<a class="anchor text-lg" href="https://dwi.lva.tuwien.ac.at/dwi20241126_criminal.html" target="_blank">Criminal thinking</a>
+				<blockquote class="blockquote w-64 text-ellipsis">„Criminal Thinking“ bedeutet, die Denkweise von Angreifern zu übernehmen, um Schwachstellen zu erkennen und Sicherheitsstrategien zu verbessern.</blockquote>
 			</div>
 		</div>
 	</div>

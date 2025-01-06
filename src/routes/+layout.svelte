@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar, Modal, initializeStores } from '@skeletonlabs/skeleton';
+	import { LightSwitch } from '@skeletonlabs/skeleton';
 
 	initializeStores();
 </script>
@@ -26,6 +27,7 @@
 			<h3 class="h3 rainbow">Rainbow table attack</h3>
 
 			<svelte:fragment slot="trail">
+				<LightSwitch />
 				<a
 					class="btn btn-sm variant-ghost-surface"
 					href="https://github.com/smasgl/TUW_DDI_MP2"
